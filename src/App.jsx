@@ -1,42 +1,24 @@
 // import { useState } from 'react'
-import './App.css'
+import './App.css';
 // import React from 'react'
-import { Form, Button, Input } from 'antd';
+// import { Button } from 'antd';
+import { Layout } from 'antd';
+import Header from './components/Header/Header'
+import './App.css'
+
+// const { Header, Content, Footer } = Layout;
+// import { Api } from '../Api';
+
 
 function App() {
-  // const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
+    // Api('terminator');
 
-  return (
-    <>
-      <div style={{
-            display: 'block', width: 700, padding: 30
-        }}>
-            <h4>ReactJS Ant-Design Form Component</h4>
-            <Form
-                name="basicform"
-                onFinishFailed={() => alert('Failed to submit')}
-                onFinish={() => alert('Form Submitted')}
-                initialValues={{ remember: true }}
-            >
-                <Form.Item
-                    label="Enter username"
-                    name="Username"
-                    rules={[{
-                        required: true,
-                        message: 'Please enter username'
-                    }]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item>
-                    <Button type="success" htmlType="submit">
-                        Submit Username
-                    </Button>
-                </Form.Item>
-            </Form>
-        </div>  
-    </>
-  )
+    return (
+        <Layout className="layout__wrapper">
+            <Header />
+        </Layout>
+    );
 }
 
-export default App
+export default App;
