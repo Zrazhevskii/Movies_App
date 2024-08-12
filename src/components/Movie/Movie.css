@@ -1,0 +1,26 @@
+li {
+    border: 2px dashed #aaa;
+}
+
+.movies__list_item {
+    display: flex;
+    flex-direction: row;
+}
+
+.movies__list_card {
+    width: 290px;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-card .ant-card-head {
+    border: none;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-card .ant-card-body {
+    padding: 0 24px 0 24px;
+}
+
+.box__button {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+}

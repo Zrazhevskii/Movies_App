@@ -1,11 +1,11 @@
 // import React from 'react'
-import { useState } from 'react';
-import './Header.css';
+// import { useState } from 'react';
+import PropTypes from 'prop-types';
+import './MoviesHeader.css';
 import { Layout, Input, Tabs } from 'antd';
 const { Header } = Layout;
 
-export default function MoviesHeader() {
-    const [valueSearch, setValueSearch] = useState('');
+export default function MoviesHeader({ handleChangeValue, valueSearch }) {
 
     const itemSearch = [
         {
@@ -17,10 +17,6 @@ export default function MoviesHeader() {
             label: 'Rated',
         },
     ];
-
-    const handleChangeValue = (evt) => {
-        setValueSearch(evt.target.value);
-    };
 
     return (
         <Header className='header'>
@@ -38,4 +34,9 @@ export default function MoviesHeader() {
             />
         </Header>
     );
+}
+
+MoviesHeader.propTypes = {
+    handleChangeValue: PropTypes.func.isRequired,
+    valueSearch: PropTypes.string.isRequired,
 }
