@@ -21,7 +21,7 @@ export default function Movie({ item }) {
         <li className='movies__list_item'>
             <Image
                 width={180}
-                height={240}
+                height={243}
                 className='movies__list_image'
                 src={`https://image.tmdb.org/t/p/w200${poster_path}`}
             />
@@ -39,7 +39,7 @@ export default function Movie({ item }) {
 Movie.propTypes = {
     item: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        poster_path: PropTypes.string.isRequired,
+        poster_path: PropTypes.string,
         overview: PropTypes.string.isRequired,
     }),
 }

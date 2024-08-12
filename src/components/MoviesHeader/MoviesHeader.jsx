@@ -5,8 +5,11 @@ import './MoviesHeader.css';
 import { Layout, Input, Tabs } from 'antd';
 const { Header } = Layout;
 
-export default function MoviesHeader({ handleChangeValue, valueSearch }) {
-
+export default function MoviesHeader({
+    handleChangeValue,
+    valueSearch,
+    handleSubmit,
+}) {
     const itemSearch = [
         {
             key: '1',
@@ -26,12 +29,15 @@ export default function MoviesHeader({ handleChangeValue, valueSearch }) {
                 items={itemSearch}
                 onChange={() => {}}
             />
-
+            {/* <form> */}
             <Input
                 placeholder='Type to search...'
                 value={valueSearch}
                 onChange={(evt) => handleChangeValue(evt)}
+                onKeyDown={(evt) => handleSubmit(evt)}
+                required
             />
+            {/* </form> */}
         </Header>
     );
 }
@@ -39,4 +45,5 @@ export default function MoviesHeader({ handleChangeValue, valueSearch }) {
 MoviesHeader.propTypes = {
     handleChangeValue: PropTypes.func.isRequired,
     valueSearch: PropTypes.string.isRequired,
-}
+    handleSubmit: PropTypes.func.isRequired,
+};
