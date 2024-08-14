@@ -2,3 +2,21 @@
     padding: 0;
     margin: 0 auto;
 }
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-pagination {
+    background-color: white;
+    /* margin-top: 20px; */
+    padding: 20px 0;
+}
+
+/* :where(.css-dev-only-do-not-override-1pg9a38).ant-pagination .ant-pagination-item-active {
+    background-color: #1677ff;    
+} */
+
+/* :where(.css-dev-only-do-not-override-1pg9a38).ant-pagination .ant-pagination-item-active a {
+    color: white;
+} */
+
+/* :where(.css-dev-only-do-not-override-1pg9a38).ant-pagination .ant-pagination-item-active a:hover {
+    color: white;
+} */

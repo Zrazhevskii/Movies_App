@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 // const api_key = '9420f971c77382011b10789475bfd7fa';
+const baseUrl = 'https://api.themoviedb.org/3/search/movie';
 const api_key = 'fe1e2a68fe8bdd299a2072adcc00e09a';
 
 export const Api = async (query) => {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`;
+    const url = baseUrl + `?api_key=${api_key}&query=${query}`;
     const response = await axios
         .get(url)
         .then((data) => {
@@ -17,7 +18,7 @@ export const Api = async (query) => {
 };
 
 export const ApiNextPage = async (query, number) => {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${number}`;
+    const url = baseUrl + `?api_key=${api_key}&query=${query}&page=${number}`;
     const response = await axios
         .get(url)
         .then((data) => {
@@ -26,9 +27,25 @@ export const ApiNextPage = async (query, number) => {
         .catch((error) => {
             console.log(error);
         });
-    console.log(response);
     return response;
 };
+
+export const getGenresMovies = async () => {
+    const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`;
+    const response = await axios
+        .get(url)
+        .then((data) => {
+            return data.data.genres;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    return response;
+};
+
+
+
+
 
 // export const data = [
 //     {

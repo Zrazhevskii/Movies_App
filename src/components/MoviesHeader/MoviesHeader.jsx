@@ -1,5 +1,3 @@
-// import React from 'react'
-// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './MoviesHeader.css';
 import { Layout, Input, Tabs } from 'antd';
@@ -29,15 +27,14 @@ export default function MoviesHeader({
                 items={itemSearch}
                 onChange={() => {}}
             />
-            {/* <form> */}
-            <Input
-                placeholder='Type to search...'
-                value={valueSearch}
-                onChange={(evt) => handleChangeValue(evt)}
-                onKeyDown={(evt) => handleSubmit(evt)}
-                required
-            />
-            {/* </form> */}
+            <form className='form' onSubmit={(evt) => handleSubmit(evt)}>
+                <Input
+                    placeholder='Type to search...'
+                    value={valueSearch}
+                    onChange={(evt) => handleChangeValue(evt)}
+                    required
+                />
+            </form>
         </Header>
     );
 }
