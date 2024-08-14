@@ -3,8 +3,9 @@ import './App.css';
 import { useState } from 'react';
 import { Layout } from 'antd';
 import { Content } from 'antd/es/layout/layout';
+
 import MoviesHeader from './components/MoviesHeader/MoviesHeader';
-import { Api, ApiNextPage, getGenresMovies } from '../Api';
+import { Api, ApiNextPage, getGenresMovies } from './Api';
 import MoviesList from './components/MoviesList/MoviesList';
 import MoviesFooter from './components/MoviesFooter/MoviesFooter';
 

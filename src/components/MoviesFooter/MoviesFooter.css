@@ -1,12 +1,12 @@
 .footer {
-    padding: 0;
-    margin: 0 auto;
+   padding: 0;
+   margin: 0 auto;
 }
 
 :where(.css-dev-only-do-not-override-1pg9a38).ant-pagination {
-    background-color: white;
-    /* margin-top: 20px; */
-    padding: 20px 0;
+   background-color: white;
+   /* margin-top: 20px; */
+   padding: 20px 0;
 }
 
 /* :where(.css-dev-only-do-not-override-1pg9a38).ant-pagination .ant-pagination-item-active {

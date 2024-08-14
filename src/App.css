@@ -1,14 +1,14 @@
 body {
-  background-color: #f5f5f5;
+   background-color: #f5f5f5;
 }
 
 .layout__wrapper {
-  max-width: 1010px;
-  /* min-height: 100vh; */
-  /* height: auto; */
+   max-width: 1010px;
+   /* min-height: 100vh; */
+   /* height: auto; */
 
-  margin: auto;
-  padding: 0;
+   margin: auto;
+   padding: 0;
 
-  background-color: white;
+   background-color: white;
 }
