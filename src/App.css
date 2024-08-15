@@ -4,7 +4,7 @@ body {
 
 .layout__wrapper {
    max-width: 1010px;
-   /* min-height: 100vh; */
+   min-height: 100vh;
    /* height: auto; */
 
    margin: auto;

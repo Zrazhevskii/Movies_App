@@ -36,11 +36,15 @@ function App() {
       }
    };
 
+   // apiGetImage('/o2utunIiqXZRfAe70xLtx68xqCb.jpg');
+
    const handleNextPage = (evt) => {
       ApiNextPage(valueSearch, evt).then((data) => {
          setMovies(data.results);
       });
    };
+
+   // console.log(genresList);
 
    return (
       <Layout className="layout__wrapper">

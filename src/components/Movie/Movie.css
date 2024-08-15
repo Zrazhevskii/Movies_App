@@ -1,12 +1,14 @@
 .movies__list_item {
    display: flex;
    flex-direction: row;
+
+   box-shadow: 5px 5px 17px -1px rgba(0, 0, 0, 0.37);
    /* height: 279px; */
 }
 
 .movies__list_card {
    position: relative;
-   width: 290px;
+   width: 300px;
 }
 
 :where(.css-dev-only-do-not-override-1pg9a38).ant-card .ant-card-head {
@@ -23,7 +25,7 @@
    height: 22px;
    /* min-width: 40px; */
    font-size: 12px;
-   margin-right: 8px;
+   /* margin-right: 8px; */
    background-color: #f3eded;
 }
 
@@ -36,18 +38,25 @@
 } */
 
 .movies__list_rating {
-   display: block;
-   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    position: absolute;
    left: 100px;
    top: 7px;
    left: 255px;
 
-   width: 26px;
-   height: 26px;
+   font-size: 12px;
+
+   width: 28px;
+   height: 28px;
 
    border: 2px solid grey;
    border-radius: 50%;
+}
+
+.movies__list_release {
+   margin-bottom: 5px;
 }
 
 .yellow {
@@ -64,10 +73,20 @@
 .movies__list_title {
    font-size: 20px;
    width: 230px;
-   padding-bottom: 8px;
+   padding-bottom: 4px;
    line-height: 1.2;
 }
 
 .movies__list_description {
-   margin-top: 10px;
+   margin-top: 5px;
+}
+
+.spin__image {
+   width: 450px;
+   height: 245px;
+   /* font-size: 45px; */
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-spin .ant-spin-dot {
+   top: 100px;
 }

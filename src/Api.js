@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 // const api_key = '9420f971c77382011b10789475bfd7fa';
 const baseUrl = 'https://api.themoviedb.org/3/search/movie';
 const apiKey = 'fe1e2a68fe8bdd299a2072adcc00e09a';
@@ -42,3 +41,12 @@ export const getGenresMovies = async () => {
       });
    return response;
 };
+
+// export const apiGetImage = async (id) => {
+//    const url = `https://image.tmdb.org/t/p/w200${id}`;
+//    const result = await axios.get(url).then((data) => {
+//       // console.log(data.data);
+//       return data.data;
+//    });
+//    console.log(result);
+// };
