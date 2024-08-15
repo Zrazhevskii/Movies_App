@@ -1,11 +1,11 @@
 // import { useState } from 'react'
 import './App.css';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Layout } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-
+import Context from './components/Context';
 import MoviesHeader from './components/MoviesHeader/MoviesHeader';
-import { Api, ApiNextPage, getGenresMovies } from './Api';
+import { apiGetMovies, ApiNextPage, getGenresMovies } from './Api';
 import MoviesList from './components/MoviesList/MoviesList';
 import MoviesFooter from './components/MoviesFooter/MoviesFooter';
 
@@ -14,6 +14,7 @@ function App() {
    const [totalResults, setTotalResults] = useState();
    const [valueSearch, setValueSearch] = useState('');
    const [genresList, setGenresList] = useState([]);
+   // const [error, setError] = useState(false);
 
    const handleChangeValue = (evt) => {
       evt.preventDefault();
@@ -23,20 +24,21 @@ function App() {
    const handleSubmit = (evt) => {
       evt.preventDefault();
       if (valueSearch.trim() !== '') {
-         Api(valueSearch).then((data) => {
-            setTotalResults(data.total_results);
-            setMovies(data.results);
-            // setValueSearch('');
-         });
+         apiGetMovies(valueSearch)
+            .then((data) => {
+               setTotalResults(data.total_results);
+               setMovies(data.results);
+            })
+            .catch((err) => {
+               console.log(err, 'что-то не так');
+            });
       }
-      if (genresList.length === 0) {
+      if (!genresList.length) {
          getGenresMovies().then((data) => {
             setGenresList(data);
          });
       }
    };
-
-   // apiGetImage('/o2utunIiqXZRfAe70xLtx68xqCb.jpg');
 
    const handleNextPage = (evt) => {
       ApiNextPage(valueSearch, evt).then((data) => {
@@ -44,16 +46,18 @@ function App() {
       });
    };
 
-   // console.log(genresList);
+   const value = useMemo(() => ({ genresList }), [genresList]);
 
    return (
-      <Layout className="layout__wrapper">
-         <MoviesHeader handleChangeValue={handleChangeValue} valueSearch={valueSearch} handleSubmit={handleSubmit} />
-         <Content>
-            <MoviesList data={movies} genresList={genresList} />
-         </Content>
-         <MoviesFooter totalResults={totalResults} handleNextPage={handleNextPage} />
-      </Layout>
+      <Context.Provider value={value}>
+         <Layout className="layout__wrapper">
+            <MoviesHeader handleChangeValue={handleChangeValue} valueSearch={valueSearch} handleSubmit={handleSubmit} />
+            <Content>
+               <MoviesList data={movies} />
+            </Content>
+            <MoviesFooter totalResults={totalResults} handleNextPage={handleNextPage} />
+         </Layout>
+      </Context.Provider>
    );
 }
 

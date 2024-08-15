@@ -3,16 +3,12 @@ import axios from 'axios';
 const baseUrl = 'https://api.themoviedb.org/3/search/movie';
 const apiKey = 'fe1e2a68fe8bdd299a2072adcc00e09a';
 
-export const Api = async (query) => {
+export const apiGetMovies = async (query) => {
    const url = `${baseUrl}?api_key=${apiKey}&query=${query}`;
-   const response = await axios
-      .get(url)
-      .then((data) => {
-         return data.data;
-      })
-      .catch((error) => {
-         console.log(error);
-      });
+   const response = await axios.get(url).then((data) => {
+      // console.log(data);
+      return data.data;
+   });
    return response;
 };
 
@@ -41,12 +37,3 @@ export const getGenresMovies = async () => {
       });
    return response;
 };
-
-// export const apiGetImage = async (id) => {
-//    const url = `https://image.tmdb.org/t/p/w200${id}`;
-//    const result = await axios.get(url).then((data) => {
-//       // console.log(data.data);
-//       return data.data;
-//    });
-//    console.log(result);
-// };

@@ -1,17 +1,20 @@
 // import React from 'react'
 import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import { useEffect, useState, useContext } from 'react';
 import { Button, Card, Image, Flex, Spin } from 'antd';
-// import { apiGetImage } from '../../Api';
+import { format } from 'date-fns';
+import Context from '../Context';
 import './Movie.css';
-import { useEffect, useState } from 'react';
 
-export default function Movie({ item, genresList }) {
+export default function Movie({ item }) {
    const { title, poster_path, overview, genre_ids, release_date: releaseDate, vote_average } = item;
+
    const image =
       poster_path === null ? '../../../src/image/noposter.jpg' : `https://image.tmdb.org/t/p/w200${poster_path}`;
 
    const [loader, setLoader] = useState(true);
+   const value = useContext(Context);
+   const { genresList } = value;
 
    useEffect(() => {
       setLoader((prev) => !prev);
@@ -36,7 +39,7 @@ export default function Movie({ item, genresList }) {
    return (
       <li className="movies__list_item">
          {loader ? (
-            <Spin tip="Loading" size="large" className="spin__image" />
+            <Spin size="large" className="spin__image" />
          ) : (
             <>
                <Image width={180} height={243} className="movies__list_image" src={image} />
@@ -68,12 +71,12 @@ Movie.propTypes = {
       release_date: PropTypes.string.isRequired,
       vote_average: PropTypes.number.isRequired,
    }),
-   genresList: PropTypes.arrayOf(
-      // PropTypes.objectOf(
-      PropTypes.shape({
-         id: PropTypes.number,
-         name: PropTypes.string,
-      }),
-      // ),
-   ),
+   // genresList: PropTypes.arrayOf(
+   //    // PropTypes.objectOf(
+   //    PropTypes.shape({
+   //       id: PropTypes.number,
+   //       name: PropTypes.string,
+   //    }),
+   //    // ),
+   // ),
 };
