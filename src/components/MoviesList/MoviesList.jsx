@@ -1,9 +1,13 @@
 // import React from 'react'
 import PropTypes from 'prop-types';
+import { Alert } from 'antd';
 import Movie from '../Movie/Movie';
 import './MoviesList.css';
 
-export default function MoviesList({ data }) {
+export default function MoviesList({ data, error }) {
+   if (error) {
+      return <Alert message="Error" description="Что-то пошло не так, перегрузите страницу" type="error" showIcon />;
+   }
    return (
       <ul className="movies__list">
          {data &&
@@ -16,4 +20,5 @@ export default function MoviesList({ data }) {
 
 MoviesList.propTypes = {
    data: PropTypes.instanceOf(Array),
+   error: PropTypes.bool.isRequired,
 };

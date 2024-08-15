@@ -14,7 +14,7 @@ function App() {
    const [totalResults, setTotalResults] = useState();
    const [valueSearch, setValueSearch] = useState('');
    const [genresList, setGenresList] = useState([]);
-   // const [error, setError] = useState(false);
+   const [error, setError] = useState(false);
 
    const handleChangeValue = (evt) => {
       evt.preventDefault();
@@ -30,7 +30,8 @@ function App() {
                setMovies(data.results);
             })
             .catch((err) => {
-               console.log(err, 'что-то не так');
+               console.log(err);
+               setError((prev) => !prev);
             });
       }
       if (!genresList.length) {
@@ -53,7 +54,7 @@ function App() {
          <Layout className="layout__wrapper">
             <MoviesHeader handleChangeValue={handleChangeValue} valueSearch={valueSearch} handleSubmit={handleSubmit} />
             <Content>
-               <MoviesList data={movies} />
+               <MoviesList data={movies} error={error} />
             </Content>
             <MoviesFooter totalResults={totalResults} handleNextPage={handleNextPage} />
          </Layout>
