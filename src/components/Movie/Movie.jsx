@@ -72,12 +72,4 @@ Movie.propTypes = {
       release_date: PropTypes.string.isRequired,
       vote_average: PropTypes.number.isRequired,
    }),
-   // genresList: PropTypes.arrayOf(
-   //    // PropTypes.objectOf(
-   //    PropTypes.shape({
-   //       id: PropTypes.number,
-   //       name: PropTypes.string,
-   //    }),
-   //    // ),
-   // ),
 };
