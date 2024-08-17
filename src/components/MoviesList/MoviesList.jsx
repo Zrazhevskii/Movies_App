@@ -6,8 +6,16 @@ import './MoviesList.css';
 
 export default function MoviesList({ data, error }) {
    if (error) {
-      return <Alert message="Error" description="Что-то пошло не так, перегрузите страницу" type="error" showIcon />;
+      return (
+         <Alert
+            message="Error"
+            description="Упс, внешний мир не отвечает, перегрузите страницу"
+            type="error"
+            showIcon
+         />
+      );
    }
+
    return (
       <ul className="movies__list">
          {data &&

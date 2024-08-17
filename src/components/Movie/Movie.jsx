@@ -25,13 +25,14 @@ export default function Movie({ item }) {
    const intersections = genresList.filter((elem) => genre_ids.includes(elem.id));
 
    const changeString = () => {
+      if (!overview.length) {
+         return 'Описание отсутствует';
+      }
+
       const str = overview.split(' ');
+
       if (str.length > 30) {
          return `${str.slice(0, 25).join(' ')}...`;
-      }
-      if (str.length < 1) {
-         console.log('я здесь');
-         return 'Описание отсутствует';
       }
       return overview;
    };

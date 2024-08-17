@@ -1,13 +1,14 @@
 // import { useState } from 'react'
 import './App.css';
 import { useState, useMemo } from 'react';
-import { Layout } from 'antd';
+import { Alert, Layout } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import Context from './components/Context';
 import MoviesHeader from './components/MoviesHeader/MoviesHeader';
 import { apiGetMovies, ApiNextPage, getGenresMovies } from './Api';
 import MoviesList from './components/MoviesList/MoviesList';
 import MoviesFooter from './components/MoviesFooter/MoviesFooter';
+import NoConnectNetwork from './components/NoConnectNetwork/NoConnectNetwork';
 
 function App() {
    const [movies, setMovies] = useState([]);
@@ -53,9 +54,18 @@ function App() {
       <Context.Provider value={value}>
          <Layout className="layout__wrapper">
             <MoviesHeader handleChangeValue={handleChangeValue} valueSearch={valueSearch} handleSubmit={handleSubmit} />
-            <Content>
-               <MoviesList data={movies} error={error} />
-            </Content>
+            {!NoConnectNetwork() ? (
+               <Alert
+                  message="Error"
+                  description="Ой, беда пришла к вам в дом... интернет отключили"
+                  type="error"
+                  showIcon
+               />
+            ) : (
+               <Content>
+                  <MoviesList data={movies} error={error} />
+               </Content>
+            )}
             <MoviesFooter totalResults={totalResults} handleNextPage={handleNextPage} />
          </Layout>
       </Context.Provider>
