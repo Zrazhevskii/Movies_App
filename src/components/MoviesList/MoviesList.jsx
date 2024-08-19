@@ -4,7 +4,18 @@ import { Alert } from 'antd';
 import Movie from '../Movie/Movie';
 import './MoviesList.css';
 
-export default function MoviesList({ data, error }) {
+export default function MoviesList({ data, error, noresult }) {
+   if (noresult) {
+      return (
+         <Alert
+            message="Informational Notes"
+            description="Вы не подумайте, мы не придираемся, но вы ищете что-то необычное, мы ничего не нашли((("
+            type="info"
+            showIcon
+         />
+      );
+   }
+
    if (error) {
       return (
          <Alert
@@ -29,4 +40,5 @@ export default function MoviesList({ data, error }) {
 MoviesList.propTypes = {
    data: PropTypes.instanceOf(Array),
    error: PropTypes.bool.isRequired,
+   noresult: PropTypes.bool.isRequired,
 };

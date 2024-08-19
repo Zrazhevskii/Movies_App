@@ -16,8 +16,16 @@ function App() {
    const [valueSearch, setValueSearch] = useState('');
    const [genresList, setGenresList] = useState([]);
    const [error, setError] = useState(false);
+   const [noresult, setNoresult] = useState(false);
+
+   const changeNoresilt = () => {
+      setNoresult((prevResult) => !prevResult);
+   };
 
    const handleChangeValue = (evt) => {
+      if (noresult) {
+         setNoresult((prevResult) => !prevResult);
+      }
       evt.preventDefault();
       setValueSearch(evt.target.value);
    };
@@ -27,8 +35,12 @@ function App() {
       if (valueSearch.trim() !== '') {
          apiGetMovies(valueSearch)
             .then((data) => {
-               setTotalResults(data.total_results);
-               setMovies(data.results);
+               if (!data.results.length) {
+                  changeNoresilt();
+               } else {
+                  setTotalResults(data.total_results);
+                  setMovies(data.results);
+               }
             })
             .catch((err) => {
                console.log(err);
@@ -63,7 +75,7 @@ function App() {
                />
             ) : (
                <Content>
-                  <MoviesList data={movies} error={error} />
+                  <MoviesList data={movies} error={error} noresult={noresult} />
                </Content>
             )}
             <MoviesFooter totalResults={totalResults} handleNextPage={handleNextPage} />
