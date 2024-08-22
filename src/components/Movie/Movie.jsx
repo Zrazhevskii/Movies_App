@@ -1,10 +1,11 @@
 // import React from 'react'
 import PropTypes from 'prop-types';
 import { useEffect, useState, useContext } from 'react';
-import { Button, Card, Image, Flex, Spin } from 'antd';
+import { Button, Card, Image, Flex, Spin, Rate } from 'antd';
 import { format } from 'date-fns';
 import Context from '../Context';
 import './Movie.css';
+import ChangeText from '../ChangeText';
 
 export default function Movie({ item }) {
    const { title, poster_path, overview, genre_ids, release_date: releaseDate, vote_average } = item;
@@ -22,20 +23,7 @@ export default function Movie({ item }) {
 
    const rating = vote_average.toFixed(1);
    const date = releaseDate ? format(releaseDate, 'MMMM dd, yyyy') : 'Дата неуказана';
-   const intersections = genresList.filter((elem) => genre_ids.includes(elem.id));
-
-   const changeString = () => {
-      if (!overview.length) {
-         return 'Описание отсутствует';
-      }
-
-      const str = overview.split(' ');
-
-      if (str.length > 30) {
-         return `${str.slice(0, 25).join(' ')}...`;
-      }
-      return overview;
-   };
+   const intersections = genresList && genresList.filter((elem) => genre_ids.includes(elem.id));
 
    return (
       <li className="movies__list_item">
@@ -46,7 +34,7 @@ export default function Movie({ item }) {
                <Image width={180} height={243} className="movies__list_image" src={image} />
                <Card className="movies__list_card">
                   <div className="movies__list_box">
-                     <div className="movies__list_title">{title}</div>
+                     <div className="movies__list_title">{ChangeText(title, 'title')}</div>
                      <div className="movies__list_rating">{rating}</div>
                   </div>
                   <div className="movies__list_release">{date}</div>
@@ -55,7 +43,8 @@ export default function Movie({ item }) {
                         return <Button key={el.id}>{el.name}</Button>;
                      })}
                   </Flex>
-                  <div className="movies__list_description">{changeString()}</div>
+                  <div className="movies__list_description">{ChangeText(overview, 'overview')}</div>
+                  <Rate className="movies__list_rate" count={10} />
                </Card>
             </>
          )}

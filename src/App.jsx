@@ -15,16 +15,22 @@ function App() {
    const [totalResults, setTotalResults] = useState();
    const [valueSearch, setValueSearch] = useState('');
    const [genresList, setGenresList] = useState([]);
-   const [error, setError] = useState(false);
-   const [noresult, setNoresult] = useState(false);
+   const [servises, setServises] = useState({
+      error: false,
+      noresult: false,
+   });
 
-   const changeNoresilt = () => {
-      setNoresult((prevResult) => !prevResult);
+   const { error, noresult } = servises;
+
+   // const [noresult, setNoresult] = useState(false);
+
+   const changeNoresult = () => {
+      setServises((prev) => ({ ...prev, noresult: !prev.noresult }));
    };
 
    const handleChangeValue = (evt) => {
       if (noresult) {
-         setNoresult((prevResult) => !prevResult);
+         setServises((prev) => ({ ...prev, noresult: !prev.noresult }));
       }
       evt.preventDefault();
       setValueSearch(evt.target.value);
@@ -36,7 +42,7 @@ function App() {
          apiGetMovies(valueSearch)
             .then((data) => {
                if (!data.results.length) {
-                  changeNoresilt();
+                  changeNoresult();
                } else {
                   setTotalResults(data.total_results);
                   setMovies(data.results);
@@ -44,7 +50,7 @@ function App() {
             })
             .catch((err) => {
                console.log(err);
-               setError((prev) => !prev);
+               setServises((prev) => ({ ...prev, error: !prev.error }));
             });
       }
       if (!genresList.length) {
