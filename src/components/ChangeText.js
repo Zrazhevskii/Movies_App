@@ -12,8 +12,8 @@ const ChangeText = (text, idText) => {
       }
       str = text.split(' ');
 
-      if (str.length > 25) {
-         return `${str.slice(0, 25).join(' ')}...`;
+      if (str.length > 20) {
+         return `${str.slice(0, 20).join(' ')}...`;
       }
    }
    return text;

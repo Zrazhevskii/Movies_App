@@ -5,7 +5,8 @@ body {
 .layout__wrapper {
    max-width: 1010px;
    min-height: 100vh;
-   /* height: auto; */
+
+   box-shadow: 5px 5px 17px -1px rgba(0, 0, 0, 0.37);
 
    margin: auto;
    padding: 0;

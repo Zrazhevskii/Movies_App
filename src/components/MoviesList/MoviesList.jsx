@@ -4,7 +4,7 @@ import { Alert } from 'antd';
 import Movie from '../Movie/Movie';
 import './MoviesList.css';
 
-export default function MoviesList({ data, error, noresult }) {
+export default function MoviesList({ data, error, noresult, addRatesMovies }) {
    if (noresult) {
       return (
          <Alert
@@ -31,7 +31,7 @@ export default function MoviesList({ data, error, noresult }) {
       <ul className="movies__list">
          {data &&
             data.map((item) => {
-               return <Movie item={item} key={item.id} />;
+               return <Movie item={item} key={item.id} addRatesMovies={addRatesMovies} />;
             })}
       </ul>
    );
@@ -41,4 +41,5 @@ MoviesList.propTypes = {
    data: PropTypes.instanceOf(Array),
    error: PropTypes.bool.isRequired,
    noresult: PropTypes.bool.isRequired,
+   addRatesMovies: PropTypes.func.isRequired,
 };

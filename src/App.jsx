@@ -11,7 +11,12 @@ import MoviesFooter from './components/MoviesFooter/MoviesFooter';
 import NoConnectNetwork from './components/NoConnectNetwork/NoConnectNetwork';
 
 function App() {
-   const [movies, setMovies] = useState([]);
+   const [movies, setMovies] = useState({
+      allMovies: [],
+      ratesMovies: [],
+      changeMovies: false,
+   });
+   const { allMovies, ratesMovies, changeMovies } = movies;
    const [totalResults, setTotalResults] = useState();
    const [valueSearch, setValueSearch] = useState('');
    const [genresList, setGenresList] = useState([]);
@@ -21,8 +26,6 @@ function App() {
    });
 
    const { error, noresult } = servises;
-
-   // const [noresult, setNoresult] = useState(false);
 
    const changeNoresult = () => {
       setServises((prev) => ({ ...prev, noresult: !prev.noresult }));
@@ -45,7 +48,7 @@ function App() {
                   changeNoresult();
                } else {
                   setTotalResults(data.total_results);
-                  setMovies(data.results);
+                  setMovies((prev) => ({ ...prev, allMovies: data.results }));
                }
             })
             .catch((err) => {
@@ -62,16 +65,34 @@ function App() {
 
    const handleNextPage = (evt) => {
       ApiNextPage(valueSearch, evt).then((data) => {
-         setMovies(data.results);
+         setMovies((prev) => ({ ...prev, allMovies: data.results }));
       });
    };
 
+   const addRatesMovies = (id) => {
+      if (changeMovies) return;
+      const rateMovie = allMovies.filter((item) => item.id === id);
+      setMovies((prev) => ({ ...prev, ratesMovies: [...ratesMovies, ...rateMovie] }));
+   };
+
+   const changeAllRatesMovies = () => {
+      setMovies((prev) => ({ ...prev, changeMovies: !prev.changeMovies }));
+   };
+
+   const countMovies = changeMovies ? ratesMovies.length : totalResults;
+   const currentMoviesList = changeMovies ? ratesMovies : allMovies;
    const value = useMemo(() => ({ genresList }), [genresList]);
 
    return (
       <Context.Provider value={value}>
          <Layout className="layout__wrapper">
-            <MoviesHeader handleChangeValue={handleChangeValue} valueSearch={valueSearch} handleSubmit={handleSubmit} />
+            <MoviesHeader
+               handleChangeValue={handleChangeValue}
+               valueSearch={valueSearch}
+               handleSubmit={handleSubmit}
+               changeAllRatesMovies={changeAllRatesMovies}
+               changeMovies={changeMovies}
+            />
             {!NoConnectNetwork() ? (
                <Alert
                   message="Error"
@@ -81,10 +102,15 @@ function App() {
                />
             ) : (
                <Content>
-                  <MoviesList data={movies} error={error} noresult={noresult} />
+                  <MoviesList
+                     data={currentMoviesList}
+                     error={error}
+                     noresult={noresult}
+                     addRatesMovies={addRatesMovies}
+                  />
                </Content>
             )}
-            <MoviesFooter totalResults={totalResults} handleNextPage={handleNextPage} />
+            <MoviesFooter totalResults={countMovies} handleNextPage={handleNextPage} />
          </Layout>
       </Context.Provider>
    );
