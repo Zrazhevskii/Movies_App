@@ -11,3 +11,18 @@
    padding: 0 16px;
    /* height: auto; */
 }
+
+.spin__image {
+   width: 100%;
+   height: 245px;
+   margin: auto;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-spin-lg .ant-spin-dot {
+   font-size: 62px;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-spin-lg .ant-spin-dot i {
+   width: 24px;
+   height: 24px;
+}

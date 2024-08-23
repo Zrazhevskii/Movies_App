@@ -1,10 +1,10 @@
 import axios from 'axios';
 // const api_key = '9420f971c77382011b10789475bfd7fa';
-const baseUrl = 'https://api.themoviedb.org/3/search/movie';
+const baseUrl = 'https://api.themoviedb.org/3';
 const apiKey = 'fe1e2a68fe8bdd299a2072adcc00e09a';
 
 export const apiGetMovies = async (query) => {
-   const url = `${baseUrl}?api_key=${apiKey}&query=${query}`;
+   const url = `${baseUrl}/search/movie?api_key=${apiKey}&query=${query}`;
    const response = await axios.get(url).then((data) => {
       return data.data;
    });
@@ -12,7 +12,7 @@ export const apiGetMovies = async (query) => {
 };
 
 export const ApiNextPage = async (query, number) => {
-   const url = `${baseUrl}?api_key=${apiKey}&query=${query}&page=${number}`;
+   const url = `${baseUrl}/search/movie?api_key=${apiKey}&query=${query}&page=${number}`;
    const response = await axios
       .get(url)
       .then((data) => {
@@ -25,7 +25,7 @@ export const ApiNextPage = async (query, number) => {
 };
 
 export const getGenresMovies = async () => {
-   const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
+   const url = `${baseUrl}/genre/movie/list?api_key=${apiKey}`;
    const response = await axios
       .get(url)
       .then((data) => {
@@ -34,5 +34,53 @@ export const getGenresMovies = async () => {
       .catch((error) => {
          console.log(error);
       });
+   return response;
+};
+
+export const getGuestSession = async () => {
+   const url = `${baseUrl}/authentication/guest_session/new`;
+   const response = await axios
+      .get(url, {
+         params: {
+            api_key: apiKey,
+         },
+      })
+      .then((data) => {
+         return data.data.guest_session_id;
+      });
+   return response;
+};
+
+export const addRating = async (movieId, guestSessionId, value) => {
+   const url = `${baseUrl}/movie/${movieId}/rating`;
+   await axios
+      .post(
+         url,
+         { value },
+         {
+            params: {
+               api_key: apiKey,
+               guest_session_id: guestSessionId,
+            },
+         },
+      )
+      .catch((error) => {
+         console.log(error);
+      });
+};
+
+export const getRatingMovies = async (page, guestSessionId) => {
+   const url = `${baseUrl}/guest_session/${guestSessionId}/rated/movies`;
+   const response = await axios
+      .get(url, {
+         params: {
+            page,
+            api_key: apiKey,
+         },
+      })
+      .then((data) => {
+         return data.data;
+      });
+
    return response;
 };

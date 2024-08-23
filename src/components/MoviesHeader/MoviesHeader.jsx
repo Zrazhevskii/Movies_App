@@ -22,8 +22,6 @@ export default function MoviesHeader({
       },
    ];
 
-   // if (changeMovies) return;
-
    return (
       <Header className="header">
          <Tabs destroyInactiveTabPane defaultActiveKey="1" items={itemTabs} onChange={changeAllRatesMovies} />

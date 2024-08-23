@@ -1,10 +1,10 @@
 // import React from 'react'
 import PropTypes from 'prop-types';
-import { Alert } from 'antd';
+import { Alert, Spin } from 'antd';
 import Movie from '../Movie/Movie';
 import './MoviesList.css';
 
-export default function MoviesList({ data, error, noresult, addRatesMovies }) {
+export default function MoviesList({ data, error, noresult, loader, guestSessionId }) {
    if (noresult) {
       return (
          <Alert
@@ -27,11 +27,15 @@ export default function MoviesList({ data, error, noresult, addRatesMovies }) {
       );
    }
 
+   if (loader) {
+      return <Spin size="large" className="spin__image" tip="Loading" />;
+   }
+
    return (
       <ul className="movies__list">
          {data &&
             data.map((item) => {
-               return <Movie item={item} key={item.id} addRatesMovies={addRatesMovies} />;
+               return <Movie item={item} key={item.id} guestSessionId={guestSessionId} />;
             })}
       </ul>
    );
@@ -41,5 +45,7 @@ MoviesList.propTypes = {
    data: PropTypes.instanceOf(Array),
    error: PropTypes.bool.isRequired,
    noresult: PropTypes.bool.isRequired,
-   addRatesMovies: PropTypes.func.isRequired,
+   // addRatesMovies: PropTypes.func.isRequired,
+   loader: PropTypes.bool.isRequired,
+   guestSessionId: PropTypes.string.isRequired,
 };

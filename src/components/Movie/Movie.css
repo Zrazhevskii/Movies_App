@@ -91,12 +91,6 @@
    margin-top: 5px;
 }
 
-.spin__image {
-   width: 450px;
-   height: 245px;
-   /* font-size: 45px; */
-}
-
 :where(.css-dev-only-do-not-override-1pg9a38).ant-spin .ant-spin-dot {
    top: 100px;
 }
