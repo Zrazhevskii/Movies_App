@@ -45,7 +45,6 @@ MoviesList.propTypes = {
    data: PropTypes.instanceOf(Array),
    error: PropTypes.bool.isRequired,
    noresult: PropTypes.bool.isRequired,
-   // addRatesMovies: PropTypes.func.isRequired,
    loader: PropTypes.bool.isRequired,
    guestSessionId: PropTypes.string.isRequired,
 };

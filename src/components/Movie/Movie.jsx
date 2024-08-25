@@ -19,7 +19,7 @@ export default function Movie({ item, guestSessionId }) {
    const rating = vote_average.toFixed(1);
    const date = releaseDate ? format(releaseDate, 'MMMM dd, yyyy') : 'Дата неуказана';
    const intersections = genresList && genresList.filter((elem) => genre_ids.includes(elem.id));
-   // console.log(intersections.length);
+
    let color = '';
    if (rating <= 3) color = 'movies__list_rating red';
    if (rating > 3 && rating <= 5) color = 'movies__list_rating orange';
@@ -71,6 +71,5 @@ Movie.propTypes = {
       vote_average: PropTypes.number.isRequired,
       rating: PropTypes.number,
    }),
-   // addRatesMovies: PropTypes.func.isRequired,
    guestSessionId: PropTypes.string.isRequired,
 };

@@ -1,5 +1,4 @@
 .movies__list_item {
-   /* position: relative; */
    display: flex;
    flex-direction: row;
 
@@ -14,12 +13,10 @@
 
 :where(.css-dev-only-do-not-override-1pg9a38).ant-card .ant-card-head {
    border: none;
-   /* padding: 0; */
    min-height: 40px;
 }
 
 :where(.css-dev-only-do-not-override-1pg9a38).ant-card .ant-card-body {
-   /* position: absolute; */
    padding: 0 20px 0 20px;
 }
 
