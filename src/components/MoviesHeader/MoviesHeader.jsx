@@ -4,13 +4,7 @@ import { Layout, Input, Tabs } from 'antd';
 
 const { Header } = Layout;
 
-export default function MoviesHeader({
-   handleChangeValue,
-   valueSearch,
-   handleSubmit,
-   changeAllRatesMovies,
-   changeMovies,
-}) {
+export default function MoviesHeader({ handleChangeValue, valueSearch, changeAllRatesMovies, changeMovies }) {
    const itemTabs = [
       {
          key: 'Search',
@@ -26,7 +20,7 @@ export default function MoviesHeader({
       <Header className="header">
          <Tabs destroyInactiveTabPane defaultActiveKey="1" items={itemTabs} onChange={changeAllRatesMovies} />
          {!changeMovies && (
-            <form className="form" onSubmit={(evt) => handleSubmit(evt)}>
+            <form className="form">
                <Input
                   placeholder="Type to search..."
                   value={valueSearch}
@@ -42,7 +36,6 @@ export default function MoviesHeader({
 MoviesHeader.propTypes = {
    handleChangeValue: PropTypes.func.isRequired,
    valueSearch: PropTypes.string.isRequired,
-   handleSubmit: PropTypes.func.isRequired,
    changeAllRatesMovies: PropTypes.func.isRequired,
    changeMovies: PropTypes.bool.isRequired,
 };

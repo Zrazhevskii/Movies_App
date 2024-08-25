@@ -10,7 +10,6 @@ import { addRating } from '../../Api';
 
 export default function Movie({ item, guestSessionId }) {
    const { id, title, poster_path, overview, genre_ids, release_date: releaseDate, vote_average } = item;
-   // console.log(item);
    const image =
       poster_path === null ? '../../../src/image/noposter.jpg' : `https://image.tmdb.org/t/p/w200${poster_path}`;
 
@@ -20,7 +19,7 @@ export default function Movie({ item, guestSessionId }) {
    const rating = vote_average.toFixed(1);
    const date = releaseDate ? format(releaseDate, 'MMMM dd, yyyy') : 'Дата неуказана';
    const intersections = genresList && genresList.filter((elem) => genre_ids.includes(elem.id));
-
+   // console.log(intersections.length);
    let color = '';
    if (rating <= 3) color = 'movies__list_rating red';
    if (rating > 3 && rating <= 5) color = 'movies__list_rating orange';
@@ -36,7 +35,7 @@ export default function Movie({ item, guestSessionId }) {
 
    return (
       <li className="movies__list_item">
-         <Image width={180} height={243} className="movies__list_image" src={image} />
+         <Image width={180} height={270} className="movies__list_image" src={image} />
          <Card className="movies__list_card">
             <div className="movies__list_box">
                <div className="movies__list_title">{ChangeText(title, 'title')}</div>
@@ -48,7 +47,7 @@ export default function Movie({ item, guestSessionId }) {
                   return <Button key={el.id}>{el.name}</Button>;
                })}
             </Flex>
-            <div className="movies__list_description">{ChangeText(overview, 'overview')}</div>
+            <div className="movies__list_description">{ChangeText(overview, 'overview', intersections.length)}</div>
             <Rate
                className="movies__list_rate"
                count={10}

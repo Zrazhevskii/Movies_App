@@ -1,4 +1,4 @@
-const ChangeText = (text, idText) => {
+const ChangeText = (text, idText, num = 0) => {
    let str;
    if (idText === 'title') {
       str = text.split(' ');
@@ -13,6 +13,7 @@ const ChangeText = (text, idText) => {
       str = text.split(' ');
 
       if (str.length > 20) {
+         if (num >= 3) return `${str.slice(0, 15).join(' ')}...`;
          return `${str.slice(0, 20).join(' ')}...`;
       }
    }
