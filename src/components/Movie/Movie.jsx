@@ -35,7 +35,15 @@ export default function Movie({ item, guestSessionId }) {
 
    return (
       <li className="movies__list_item">
-         <Image width={180} height={270} className="movies__list_image" src={image} />
+         <Image
+            bodyStyle={{
+               width: 180,
+               overflow: 'auto',
+            }}
+            height={270}
+            maskClassName="movies__list_image"
+            src={image}
+         />
          <Card className="movies__list_card">
             <div className="movies__list_box">
                <div className="movies__list_title">{ChangeText(title, 'title')}</div>
