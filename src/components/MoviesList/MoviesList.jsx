@@ -4,31 +4,17 @@ import { Alert, Spin } from 'antd';
 import Movie from '../Movie/Movie';
 import './MoviesList.css';
 
-export default function MoviesList({ data, error, noresult, loader, guestSessionId }) {
+export default function MoviesList({ data, error, noresult, loader, guestSessionId, errorInfo, noresultInfo }) {
    if (noresult) {
-      return (
-         <Alert
-            message="Informational Notes"
-            description="Вы не подумайте, мы не придираемся, но вы ищете что-то необычное, мы ничего не нашли((("
-            type="info"
-            showIcon
-         />
-      );
+      return <Alert message="Informational Notes" description={noresultInfo} type="info" showIcon />;
    }
 
    if (error) {
-      return (
-         <Alert
-            message="Error"
-            description="Упс, внешний мир не отвечает, перегрузите страницу"
-            type="error"
-            showIcon
-         />
-      );
+      return <Alert message="Error" description={errorInfo} type="error" showIcon />;
    }
 
    if (loader) {
-      return <Spin size="large" className="spin__image" tip="Loading" />;
+      return <Spin size="large" className="spin__image" />;
    }
 
    return (
@@ -47,4 +33,6 @@ MoviesList.propTypes = {
    noresult: PropTypes.bool.isRequired,
    loader: PropTypes.bool.isRequired,
    guestSessionId: PropTypes.string.isRequired,
+   errorInfo: PropTypes.string.isRequired,
+   noresultInfo: PropTypes.string.isRequired,
 };

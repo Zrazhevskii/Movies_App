@@ -31,6 +31,7 @@ module.exports = {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'jsx-a11y/no-autofocus': 'off',
       // 'no-alert': 'off',
+      'no-useless-return': "error",
       'react/require-default-props': 0,
    },
 };

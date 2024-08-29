@@ -7,18 +7,23 @@ const { Header } = Layout;
 export default function MoviesHeader({ handleChangeValue, valueSearch, changeAllRatesMovies, changeMovies }) {
    const itemTabs = [
       {
-         key: 'Search',
+         key: 1,
          label: 'Search',
       },
       {
-         key: 'Rated',
+         key: 2,
          label: 'Rated',
       },
    ];
 
    return (
       <Header className="header">
-         <Tabs destroyInactiveTabPane defaultActiveKey="1" items={itemTabs} onChange={changeAllRatesMovies} />
+         <Tabs
+            destroyInactiveTabPane
+            defaultActiveKey="1"
+            items={itemTabs}
+            onChange={(evt) => changeAllRatesMovies(evt)}
+         />
          {!changeMovies && (
             <form className="form">
                <Input

@@ -3,22 +3,35 @@ import PropTypes from 'prop-types';
 import { useState, useContext } from 'react';
 import { Button, Card, Image, Flex, Rate } from 'antd';
 import { format } from 'date-fns';
-import Context from '../Context';
+import Context from '../../utils/Context';
 import './Movie.css';
-import ChangeText from '../ChangeText';
-import { addRating } from '../../Api';
+// import '../../../src/assets/noposter.jpg'
+import ChangeText from '../../utils/ChangeText';
+import { addRating } from '../../servises/Api';
 
 export default function Movie({ item, guestSessionId }) {
-   const { id, title, poster_path, overview, genre_ids, release_date: releaseDate, vote_average } = item;
-   const image =
-      poster_path === null ? '../../../src/image/noposter.jpg' : `https://image.tmdb.org/t/p/w200${poster_path}`;
+   const {
+      id,
+      title,
+      poster_path: posterPath,
+      overview,
+      genre_ids: genreIds,
+      release_date: releaseDate,
+      vote_average: voteAverage,
+   } = item;
+   const noPoster = '../../../src/assets/noposter.jpg';
+   const baseImageUrl = 'https://image.tmdb.org/t/p/w200/';
+   const posterImage = new URL(`/t/p/w200/${posterPath}`, baseImageUrl);
+   // console.log(posterImage.href);
+   const image = posterPath === null ? noPoster : posterImage.href;
+   // console.log(posterPath);
 
    const [rate, setRate] = useState(item.rating);
    const value = useContext(Context);
    const { genresList } = value;
-   const rating = vote_average.toFixed(1);
+   const rating = voteAverage.toFixed(1);
    const date = releaseDate ? format(releaseDate, 'MMMM dd, yyyy') : 'Дата неуказана';
-   const intersections = genresList && genresList.filter((elem) => genre_ids.includes(elem.id));
+   const intersections = genresList && genresList.filter((elem) => genreIds.includes(elem.id));
 
    let color = '';
    if (rating <= 3) color = 'movies__list_rating red';
@@ -35,15 +48,7 @@ export default function Movie({ item, guestSessionId }) {
 
    return (
       <li className="movies__list_item">
-         <Image
-            bodyStyle={{
-               width: 180,
-               overflow: 'auto',
-            }}
-            height={270}
-            maskClassName="movies__list_image"
-            src={image}
-         />
+         <Image height={270} className="movies__list_image" src={image} />
          <Card className="movies__list_card">
             <div className="movies__list_box">
                <div className="movies__list_title">{ChangeText(title, 'title')}</div>
