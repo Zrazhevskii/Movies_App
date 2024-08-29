@@ -8,7 +8,7 @@
 
 .movies__list_card {
    position: relative;
-   width: 63%;
+   width: 62%;
 }
 
 :where(.css-dev-only-do-not-override-1pg9a38).ant-card .ant-card-head {
@@ -24,6 +24,11 @@
    height: 22px;
    font-size: 12px;
    background-color: #f3eded;
+}
+
+.movies__list_item :where(.css-dev-only-do-not-override-1pg9a38)[class^='ant-image'] {
+   max-height: 270px;
+   object-fit: contain;
 }
 
 .movies__list_rate {
@@ -50,7 +55,7 @@
 }
 
 .movies__list_release {
-   margin-bottom: 5px;
+   margin-bottom: 10px;
 }
 
 .orange {
@@ -84,25 +89,51 @@
 }
 
 .movies__list_description {
-   margin-top: 5px;
+   margin-top: 10px;
 }
 
 :where(.css-dev-only-do-not-override-1pg9a38).ant-spin .ant-spin-dot {
    top: 100px;
 }
 
-@media (max-width: 520px) {
-   /* .movies__list_item {
+@media (max-width: 530px) {
+   .movies__list_item {
       height: 245px;
-   } */
+   }
+
+   .movies__list_release {
+      margin-bottom: 3px;
+   }
 
    .movies__list_rate {
-      top: 230px;
+      top: 220px;
+   }
+
+   .movies__list_description {
+      margin-top: 3px;
+   }
+
+   .movies__list_title {
+      width: 95%;
+   }
+
+   /* :where(.css-dev-only-do-not-override-1pg9a38).ant-layout {
+
+   } */
+
+   .movies__list_item :where(.css-dev-only-do-not-override-1pg9a38)[class^='ant-image'] {
+      max-height: 245px;
+      object-fit: contain;
    }
 
    :where(.css-dev-only-do-not-override-1pg9a38).ant-rate {
-      font-size: 13px;
+      font-size: 12px;
    }
+
+   /* .movies__list_image {
+      
+      height: auto;
+   } */
 
    .movies__list_rating {
       left: 80%;

@@ -5,7 +5,6 @@ import { Button, Card, Image, Flex, Rate } from 'antd';
 import { format } from 'date-fns';
 import Context from '../../utils/Context';
 import './Movie.css';
-// import '../../../src/assets/noposter.jpg'
 import ChangeText from '../../utils/ChangeText';
 import { addRating } from '../../servises/Api';
 
@@ -22,10 +21,7 @@ export default function Movie({ item, guestSessionId }) {
    const noPoster = '../../../src/assets/noposter.jpg';
    const baseImageUrl = 'https://image.tmdb.org/t/p/w200/';
    const posterImage = new URL(`/t/p/w200/${posterPath}`, baseImageUrl);
-   // console.log(posterImage.href);
    const image = posterPath === null ? noPoster : posterImage.href;
-   // console.log(posterPath);
-
    const [rate, setRate] = useState(item.rating);
    const value = useContext(Context);
    const { genresList } = value;
@@ -48,7 +44,7 @@ export default function Movie({ item, guestSessionId }) {
 
    return (
       <li className="movies__list_item">
-         <Image height={270} className="movies__list_image" src={image} />
+         <Image className="movies__list_image" src={image} />
          <Card className="movies__list_card">
             <div className="movies__list_box">
                <div className="movies__list_title">{ChangeText(title, 'title')}</div>
