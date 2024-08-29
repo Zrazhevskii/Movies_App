@@ -30,6 +30,7 @@ function App() {
    });
    const { error, noresult, loader, errorInfo, noresultInfo } = servises;
    const storage = localStorage.getItem('key');
+   // const storage = '';
 
    const changeNoresult = (text) => {
       setServises((prev) => ({
@@ -61,7 +62,7 @@ function App() {
                   changeNoresult(
                      'Вы не подумайте, мы не придираемся, но вы ищете что-то необычное, мы ничего не нашли(((',
                   );
-                  setTimeout(() => changeNoresult(''), 2000);
+                  setTimeout(() => changeNoresult(''), 1000);
                } else {
                   setTotalResults(data.total_results);
                   setMovies((prev) => ({ ...prev, allMovies: data.results }));
@@ -145,9 +146,6 @@ function App() {
          errorResult('');
       }
 
-      if (noresult) {
-         changeNoresult('');
-      }
       setMovies((prev) => ({ ...prev, changeMovies: !prev.changeMovies }));
 
       if (evt === 1) {
@@ -160,8 +158,8 @@ function App() {
       setServises((prev) => ({ ...prev, loader: !prev.loader }));
       if (!storage && !guestSessionId.length) {
          setServises((prev) => ({ ...prev, loader: !prev.loader }));
-         changeNoresult('А вы еще ничего не и выбрали');
-         setTimeout(() => changeNoresult(''), 2000);
+         changeNoresult('А вы ничего не и выбрали');
+         setTimeout(() => changeNoresult(''), 700);
          return;
       }
       if (storage && !guestSessionId.length) {
